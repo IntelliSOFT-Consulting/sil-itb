@@ -33,6 +33,7 @@ services:
        - "9000:9000"
       environment:
        - THEME=ec
+       - AUTOMATION_ENABLED=true
       volumes:
        - gitb-repo:/gitb-repository
       depends_on:
