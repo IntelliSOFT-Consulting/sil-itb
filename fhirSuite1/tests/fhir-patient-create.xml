@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase id="fhir-patient-create" xmlns="http://www.gitb.com/tdl/v1/" xmlns:gitb="http://www.gitb.com/core/v1/">
+    <metadata>
+        <gitb:name>[FHIR-TC1] Patient Create Forwarding</gitb:name>
+        <gitb:version>1.0</gitb:version>
+        <gitb:description>
+            Test case that receives a Patient Create request from the SUT, forwards it
+            to a target FHIR server, and validates that a 201 response is returned.
+        </gitb:description>
+    </metadata>
+
+    <!-- Declare actors -->
+    <actors>
+        <gitb:actor id="FHIRClient" name="FHIR Client" role="SUT"/>
+    </actors>
+
+    <!-- Declare an input parameter for the FHIR server base URL -->
+    <inputs>
+        <input name="fhirBaseUrl" type="string" description="FHIR server base URL"/>
+    </inputs>
+
+    <steps>
+        <!-- Step 1: Receive Patient Create request from the SUT -->
+        <receive id="sut-request" from="FHIRClient" desc="Receive Patient Create request">
+            <data name="requestPayload"/>
+        </receive>
+
+        <!-- Step 2: Forward request to external FHIR server -->
+        <invoke id="forward-to-fhir"
+                desc="Forward Patient Create to FHIR Server"
+                endpoint="${fhirBaseUrl}/Patient"
+                method="POST"
+                input="requestPayload"
+                output="fhirResponse"/>
+
+        <!-- Step 3: Verify FHIR server response -->
+        <verify id="check-response" desc="Check FHIR server response code">
+            <condition>
+                <equals>
+                    <value-of select="fhirResponse.statusCode"/>
+                    <literal>201</literal>
+                </equals>
+            </condition>
+        </verify>
+    </steps>
+
+    <output>
+        <success>
+            <default>"FHIR Patient Create test succeeded."</default>
+        </success>
+        <failure>
+            <default>"FHIR Patient Create test failed. See logs for details."</default>
+        </failure>
+    </output>
+</testcase>
