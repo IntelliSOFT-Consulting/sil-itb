@@ -10,7 +10,7 @@
         <gitb:actor id="HAPIServer" name="HAPI Server"/>
     </actors>
     <steps>
-        <assign to="httpHeaders{Content-Type}">"application/xml"</assign>
+        <assign to="httpHeaders{Content-Type}">"application/json"</assign>
         <receive id="receivePatientData" desc="Receive patient payload" handler="HttpMessagingV2">
             <input name="uriExtension">"/receivePatient"</input>
             <input name="method">"POST"</input>
@@ -19,7 +19,7 @@
             <input name="headers">$httpHeaders</input>
         </receive>
         <send id="forwardToHAPI" desc="Forward to HAPI server" handler="HttpMessagingV2">
-            <input name="uri">"http://hapi.fhir.org/baseR4"</input>
+            <input name="uri">"http://hapi.fhir.org/baseR4/Patient"</input>
             <input name="method">"POST"</input>
             <input name="body">$receivePatientData{request}{body}</input>
             <input name="headers">$httpHeaders</input>
@@ -27,7 +27,7 @@
         <!-- Validate the server response status code -->
         <verify handler="StringValidator" desc="Validate server response status">
             <input name="actual">$forwardToHAPI{response}{status}</input>
-            <input name="expected">"200"</input>
+            <input name="expected">"201"</input>
             <input name="failureMessage">"The server response status was not 200."</input>
         </verify>
         <!-- Additional checks can be added here for headers or body content -->
