@@ -22,4 +22,5 @@
     <testcase id="testCaseCarePlanValidation"/>
     <testcase id="testCaseProcedureValidation"/>
     <testcase id="testCaseMedicationValidation"/>
+    <testcase id="testCaseBundleValidation"/> 
 </testsuite>
