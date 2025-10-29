@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testcase id="testCasePatientValidation" xmlns="http://www.gitb.com/tdl/v1/" xmlns:gitb="http://www.gitb.com/core/v1/">
     <metadata>
-        <gitb:name>Patient Payload Validation</gitb:name>
+        <gitb:name>Patient</gitb:name>
         <gitb:version>1.0</gitb:version>
         <gitb:description>Test case to validate a patient payload by forwarding it to a HAPI server and checking the server response.</gitb:description>
     </metadata>

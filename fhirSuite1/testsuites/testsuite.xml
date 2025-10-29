@@ -18,4 +18,8 @@
     <testcase id="testCasePatientValidation"/>
     <testcase id="testCaseConditionValidation"/>
     <testcase id="testCaseAllergyIntoleranceValidation"/>
+    <testcase id="testCaseImmunizationValidation"/>
+    <testcase id="testCaseCarePlanValidation"/>
+    <testcase id="testCaseProcedureValidation"/>
+    <testcase id="testCaseMedicationValidation"/>
 </testsuite>
